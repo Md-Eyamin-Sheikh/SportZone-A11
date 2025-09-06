@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom'
+
 import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
@@ -60,12 +62,13 @@ const Navbar = () => {
           <div className="hidden md:flex items-center">
             {!isLoggedIn ? (
               <div className="space-x-3">
-                <button 
+                <Link 
+                to='/loginpage'
                   onClick={handleLogin}
                   className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   Login
-                </button>
+                </Link>
               </div>
             ) : (
               <div className="relative">
