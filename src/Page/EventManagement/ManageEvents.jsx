@@ -85,7 +85,7 @@ export default function ManageEvents() {
                 <td className="py-3 px-4">{ev.location}</td>
                 <td className="py-3 px-4 flex justify-center gap-3">
                   {/* Update Button */}
-                  <Link to={`/updateEvent/${ev._id}`}>
+                  <Link to={`/update-event/${ev._id}`}>
                     <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg shadow">
                       Update
                     </button>

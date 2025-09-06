@@ -15,6 +15,7 @@ import CreateEvent from './Page/EventManagement/CreateEvent.jsx';
 import EventDetailsPage from './Page/EventManagement/EventDetailsPage.jsx';
 import MyBookings from './Page/EventManagement/MyBookings.jsx';
 import ManageEvents from './Page/EventManagement/ManageEvents.jsx';
+import UpdateEvent from './Page/EventManagement/UpdateEvent.jsx';
 // import { path } from 'framer-motion/client';
 
 const router = createBrowserRouter([
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/manageevents",
         element: <ManageEvents/>
+      },
+      {
+        path: "/update-event/:id",
+        element:<UpdateEvent/>
       }
 
     ]
