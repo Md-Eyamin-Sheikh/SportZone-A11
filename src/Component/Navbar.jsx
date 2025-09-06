@@ -52,12 +52,28 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
+            <Link to="/" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
               Home
             </Link>
-            <Link to="/createvent" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
-              Events
-            </Link>
+            {currentUser && (
+              <>
+                <Link to="/createvent" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
+                  Create Event
+                </Link>
+                <Link to="/my-bookings" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Book an Event
+                </Link>
+                <Link to="" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  My Bookings
+                </Link>
+                <Link to="/manageevents" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Manage Events
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Desktop Auth Section */}
@@ -78,7 +94,9 @@ const Navbar = () => {
                 </Link>
               </div>
             ) : (
+              
               <div className="relative">
+                
                 <button
                   onClick={toggleProfileDropdown}
                   onMouseEnter={() => setShowProfileDropdown(true)}
@@ -103,19 +121,8 @@ const Navbar = () => {
                       <p className="text-sm font-medium text-gray-900">{currentUser.displayName || "User"}</p>
                       <p className="text-sm text-gray-500">Athlete</p>
                     </div>
-                    <div className="py-1">
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
-                        <Calendar className="w-4 h-4 mr-3" />
-                        Book an Event
-                      </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
-                        <BookOpen className="w-4 h-4 mr-3" />
-                        My Bookings
-                      </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
-                        <Settings className="w-4 h-4 mr-3" />
-                        Manage Events
-                      </a>
+                     <div className="py-1"> 
+                      
                       <div className="border-t border-gray-100 mt-1 pt-1">
                         <button
                           onClick={handleLogout}

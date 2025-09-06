@@ -32,17 +32,25 @@ export default function EventDetailsPage() {
     if (!event || !user) return;
 
     const bookingData = {
-      eventId: event._id,
-      eventName: event.eventName,
+      event_name: event.eventName,
+      event_date: event.eventDate,
+      location: event.description || "Location not specified",
       userEmail: user.email,
       userName: user.displayName || user.email,
     };
 
     try {
-      // TODO: Replace with real POST request to DB for bookings
-      console.log("Booking Saved:", bookingData);
+      const res = await fetch("http://localhost:5000/myBookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingData),
+      });
 
-      Swal.fire("Success!", "Your booking has been confirmed!", "success");
+      if (res.ok) {
+        Swal.fire("Success!", "Your booking has been confirmed!", "success");
+      } else {
+        Swal.fire("Error!", "Failed to book the event.", "error");
+      }
     } catch (err) {
       console.error(err);
       Swal.fire("Error!", "Something went wrong while booking.", "error");

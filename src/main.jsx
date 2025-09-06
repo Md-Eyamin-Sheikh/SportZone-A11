@@ -13,6 +13,8 @@ import HomePage from './Page/HomePage/HomePage.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import CreateEvent from './Page/EventManagement/CreateEvent.jsx';
 import EventDetailsPage from './Page/EventManagement/EventDetailsPage.jsx';
+import MyBookings from './Page/EventManagement/MyBookings.jsx';
+import ManageEvents from './Page/EventManagement/ManageEvents.jsx';
 // import { path } from 'framer-motion/client';
 
 const router = createBrowserRouter([
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path:"/evendetails/:id",
         element:<EventDetailsPage/>
+      },
+      {
+        path: "/my-bookings",
+        element: <MyBookings/>
+      },
+      {
+        path: "/manageevents",
+        element: <ManageEvents/>
       }
 
     ]
