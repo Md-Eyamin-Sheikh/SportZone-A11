@@ -52,9 +52,9 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
+            <Link to="/" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
               Home
-            </a>
+            </Link>
             <a href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
               Events
             </a>
@@ -141,9 +141,9 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-blue-700 bg-blue-800/95 backdrop-blur-sm">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
+              <Link to="/" href="#" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
                 Home
-              </a>
+              </Link>
               <a href="#" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
                 Events
               </a>

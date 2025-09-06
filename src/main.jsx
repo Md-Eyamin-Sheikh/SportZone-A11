@@ -9,6 +9,7 @@ import { RouterProvider } from "react-router/dom";
 import MainRout from './MainRout/MainRout.jsx';
 import LoginPage from './Page/Authentication System/LoginPage.jsx';
 import RegisterPage from './Page/Authentication System/RegisterPage.jsx';
+import HomePage from './Page/HomePage/HomePage.jsx';
 // import { path } from 'framer-motion/client';
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainRout/>,
     children:[
+      {
+        path:"/",
+        element: <HomePage/>
+      },
       {
         path:"/loginpage",
         element: <LoginPage/>
@@ -25,7 +30,7 @@ const router = createBrowserRouter([
         path:"/register-page",
         element:<RegisterPage/>
       }
-      
+
     ]
   },
 ]);
