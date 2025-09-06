@@ -9,15 +9,18 @@ export default function HomePage() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    // TODO: Replace with API/fetch from DB
-    setEvents([
-      { id: 1, name: "Marathon 2025", date: "2025-09-15", location: "Dhaka, Bangladesh" },
-      { id: 2, name: "Football Championship", date: "2025-09-20", location: "Chittagong Stadium" },
-      { id: 3, name: "Cricket Super League", date: "2025-09-25", location: "Sylhet Stadium" },
-      { id: 4, name: "Cycling Tournament", date: "2025-10-01", location: "Rajshahi Track" },
-      { id: 5, name: "Swimming Gala", date: "2025-10-05", location: "Khulna Pool" },
-      { id: 6, name: "Tennis Open", date: "2025-10-10", location: "Barisal Court" },
-    ]);
+    fetch("http://localhost:5000/events")
+      .then((res) => res.json())
+      .then((data) => {
+        const formattedEvents = data.map((event) => ({
+          id: event._id,
+          name: event.eventName,
+          date: event.eventDate,
+          location: event.description || "Location not specified", // Assuming location is in description or placeholder
+        }));
+        setEvents(formattedEvents);
+      })
+      .catch((err) => console.error("Failed to fetch events:", err));
   }, []);
 
   // slider settings
@@ -93,7 +96,7 @@ export default function HomePage() {
               <p className="text-gray-600">📍 {event.location}</p>
               <div className="mt-4 flex justify-between">
                 <Link
-                  to={`/events/${event.id}`}
+                  to= {`/evendetails/${event.id}`}
                   className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
                 >
                   View Details

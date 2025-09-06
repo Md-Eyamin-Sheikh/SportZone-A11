@@ -12,6 +12,7 @@ import RegisterPage from './Page/Authentication System/RegisterPage.jsx';
 import HomePage from './Page/HomePage/HomePage.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import CreateEvent from './Page/EventManagement/CreateEvent.jsx';
+import EventDetailsPage from './Page/EventManagement/EventDetailsPage.jsx';
 // import { path } from 'framer-motion/client';
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path:"/createvent",
         element: <CreateEvent/>
+      },
+      {
+        path:"/evendetails/:id",
+        element:<EventDetailsPage/>
       }
 
     ]
