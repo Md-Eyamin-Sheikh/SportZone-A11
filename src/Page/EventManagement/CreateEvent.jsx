@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 
@@ -13,9 +13,17 @@ export default function CreateEvent() {
     eventDate: "",
     description: "",
     picture: "",
-    creatorEmail: user?.email || "",
-    creatorName: user?.displayName || "",
+    creatorEmail: "",
+    creatorName: "",
   });
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      creatorEmail: user?.email || "",
+      creatorName: user?.displayName || "",
+    }));
+  }, [user]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -78,7 +86,7 @@ export default function CreateEvent() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Event Name */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block text-gray-900 font-medium mb-1">
               Event Name
             </label>
             <input
@@ -87,21 +95,21 @@ export default function CreateEvent() {
               value={formData.eventName}
               onChange={handleChange}
               placeholder="Enter event name"
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-3 text-gray-950 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
               required
             />
           </div>
 
           {/* Event Type */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block text-gray-900 font-medium mb-1">
               Event Type
             </label>
             <select
               name="eventType"
               value={formData.eventType}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-3 text-gray-950 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
             >
               <option>Swimming</option>
               <option>Sprinting</option>
@@ -117,7 +125,7 @@ export default function CreateEvent() {
 
           {/* Event Date */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block text-gray-900 font-medium mb-1">
               Event Date
             </label>
             <input
@@ -125,14 +133,14 @@ export default function CreateEvent() {
               name="eventDate"
               value={formData.eventDate}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-3 text-gray-950 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
               required
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block text-gray-900 font-medium mb-1">
               Description
             </label>
             <textarea
@@ -140,7 +148,7 @@ export default function CreateEvent() {
               value={formData.description}
               onChange={handleChange}
               placeholder="Write a short description..."
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+              className="w-full text-gray-950 px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
               rows="4"
             ></textarea>
           </div>
@@ -148,7 +156,7 @@ export default function CreateEvent() {
           {/* Creator Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-gray-700 font-medium mb-1">
+              <label className="block text-gray-900 font-medium mb-1">
                 Creator Email
               </label>
               <input
@@ -156,11 +164,11 @@ export default function CreateEvent() {
                 name="creatorEmail"
                 value={formData.creatorEmail}
                 readOnly
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-gray-100"
+                className="w-full px-4 text-gray-950 py-3 rounded-xl border border-gray-300 bg-gray-100"
               />
             </div>
             <div>
-              <label className="block text-gray-700 font-medium mb-1">
+              <label className="block text-gray-900 font-medium mb-1">
                 Creator Name
               </label>
               <input
@@ -168,14 +176,14 @@ export default function CreateEvent() {
                 name="creatorName"
                 value={formData.creatorName}
                 readOnly
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-gray-100"
+                className="w-full px-4 py-3 text-gray-950 rounded-xl border border-gray-300 bg-gray-100"
               />
             </div>
           </div>
 
           {/* Event Picture */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block text-gray-900 font-medium mb-1">
               Event Picture URL
             </label>
             <input
@@ -184,7 +192,7 @@ export default function CreateEvent() {
               value={formData.picture}
               onChange={handleChange}
               placeholder="https://example.com/image.jpg"
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-3 text-gray-950 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500"
               required
             />
           </div>

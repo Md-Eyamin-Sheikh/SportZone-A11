@@ -66,9 +66,15 @@ const Navbar = () => {
               <div className="space-x-3">
                 <Link
                 to='/loginpage'
-                  className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="btn btn-active btn-secondary "
                 >
                   Login
+                </Link>
+                <Link
+                to='/register-page'
+                  className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                >
+                  Register
                 </Link>
               </div>
             ) : (
