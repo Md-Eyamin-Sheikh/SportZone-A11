@@ -1,15 +1,46 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import loginAnimation from "../../Loti-animesun/Login.json"
-
+import loginAnimation from "../../Loti-animesun/Login.json";
+import Swal from "sweetalert2";
 import Lottie from "lottie-react";
+import { auth } from "../../Firbas/Firbas";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export default function LoginPage() {
-  const handleLogin = (e) => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // TODO: Add email/password login logic
-    console.log("Login submitted");
+    setLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      Swal.fire("Success", "Login successful!", "success");
+      navigate("/");
+    } catch (error) {
+      Swal.fire("Error", error.message, "error");
+    }
+    setLoading(false);
+  };
+
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      Swal.fire("Success", "Google login successful!", "success");
+      navigate("/");
+    } catch (error) {
+      Swal.fire("Error", error.message, "error");
+    }
+    setLoading(false);
   };
 
 
@@ -37,6 +68,9 @@ export default function LoginPage() {
                   <label className="block text-gray-900 font-medium mb-1">Email</label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                     placeholder="Enter your email"
                     className="w-full px-4 py-3 text-gray-950 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -46,6 +80,9 @@ export default function LoginPage() {
                   <label className="block text-gray-900 font-medium mb-1">Password</label>
                   <input
                     type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
                     required
                     placeholder="Enter your password"
                     className="w-full px-4 py-3 rounded-xl text-gray-950 border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -57,11 +94,31 @@ export default function LoginPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow-md transition"
+                  disabled={loading}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow-md transition disabled:opacity-50"
                 >
-                  Login
+                  {loading ? "Logging in..." : "Login"}
                 </motion.button>
               </form>
+
+              {/* Divider */}
+              <div className="flex items-center my-6">
+                <hr className="flex-grow border-gray-300" />
+                <span className="px-3 text-gray-500 text-sm">OR</span>
+                <hr className="flex-grow border-gray-300" />
+              </div>
+
+              {/* Google Login */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleGoogleLogin}
+                disabled={loading}
+                className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-xl shadow-sm hover:bg-gray-50 transition disabled:opacity-50"
+              >
+                <FcGoogle size={22} />
+                <span className="font-medium text-gray-950">Continue with Google</span>
+              </motion.button>
               {/* Register Link */}
               <p className="text-center text-gray-600 mt-6">
                 Don't have an account?{" "}

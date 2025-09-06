@@ -1,28 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
+import { auth } from '../Firbas/Firbas';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
-  // Mock user data
-  const user = {
-    name: "Alex Johnson",
-    profilePicture: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-  };
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    setIsMobileMenuOpen(false);
-  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setShowProfileDropdown(false);
-    setIsMobileMenuOpen(false);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setShowProfileDropdown(false);
+      setIsMobileMenuOpen(false);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   const toggleProfileDropdown = () => {
@@ -60,11 +62,10 @@ const Navbar = () => {
 
           {/* Desktop Auth Section */}
           <div className="hidden md:flex items-center">
-            {!isLoggedIn ? (
+            {!currentUser ? (
               <div className="space-x-3">
-                <Link 
+                <Link
                 to='/loginpage'
-                  onClick={handleLogin}
                   className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   Login
@@ -78,22 +79,22 @@ const Navbar = () => {
                   className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full p-1 pr-3 hover:bg-white/20 transition-all duration-200 group"
                 >
                   <img
-                    src={user.profilePicture}
+                    src={currentUser.photoURL || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"}
                     alt="Profile"
                     className="w-10 h-10 rounded-full border-2 border-white/30 group-hover:border-orange-300 transition-colors"
                   />
-                  <span className="text-white font-medium hidden lg:block">{user.name}</span>
+                  <span className="text-white font-medium hidden lg:block">{currentUser.displayName || "User"}</span>
                   <ChevronDown className="w-4 h-4 text-white group-hover:text-orange-300 transition-colors" />
                 </button>
 
                 {/* Profile Dropdown */}
                 {showProfileDropdown && (
-                  <div 
+                  <div
                     className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50"
                     onMouseLeave={() => setShowProfileDropdown(false)}
                   >
                     <div className="px-4 py-3 border-b border-gray-100">
-                      <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                      <p className="text-sm font-medium text-gray-900">{currentUser.displayName || "User"}</p>
                       <p className="text-sm text-gray-500">Athlete</p>
                     </div>
                     <div className="py-1">
@@ -147,18 +148,18 @@ const Navbar = () => {
                 Events
               </a>
               
-              {!isLoggedIn ? (
-                <button
-                  onClick={handleLogin}
-                  className="w-full text-left bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-2 rounded-md font-medium mt-3"
+              {!currentUser ? (
+                <Link
+                  to='/loginpage'
+                  className="w-full text-left bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-2 rounded-md font-medium mt-3 block"
                 >
                   Login
-                </button>
+                </Link>
               ) : (
                 <div className="border-t border-blue-700 mt-3 pt-3">
                   <div className="flex items-center px-3 py-2 text-white">
-                    <img src={user.profilePicture} alt="Profile" className="w-8 h-8 rounded-full mr-3" />
-                    <span className="font-medium">{user.name}</span>
+                    <img src={currentUser.photoURL || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"} alt="Profile" className="w-8 h-8 rounded-full mr-3" />
+                    <span className="font-medium">{currentUser.displayName || "User"}</span>
                   </div>
                   <a href="#" className="flex items-center px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
                     <Calendar className="w-4 h-4 mr-3" />
