@@ -16,6 +16,9 @@ import EventDetailsPage from './Page/EventManagement/EventDetailsPage.jsx';
 import MyBookings from './Page/EventManagement/MyBookings.jsx';
 import ManageEvents from './Page/EventManagement/ManageEvents.jsx';
 import UpdateEvent from './Page/EventManagement/UpdateEvent.jsx';
+import SeeAllEvents from './Page/EventManagement/SeeAllEvents.jsx';
+import PopularSports from './Page/HomePage/PopularSports.jsx';
+import Testimonials from './Page/HomePage/Testimonials.jsx';
 // import { path } from 'framer-motion/client';
 
 const router = createBrowserRouter([
@@ -55,6 +58,18 @@ const router = createBrowserRouter([
       {
         path: "/update-event/:id",
         element:<UpdateEvent/>
+      },
+      {
+        path:"/events",
+        element:<SeeAllEvents/>
+      },
+      {
+        path:"/popularsports",
+        element:<PopularSports/>
+      },
+      {
+        path:"/testimonials",
+        element:<Testimonials/>
       }
 
     ]

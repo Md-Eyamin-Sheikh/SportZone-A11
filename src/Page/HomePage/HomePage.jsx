@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import PopularSports from "./PopularSports";
+import Testimonials from "./Testimonials";
 
 export default function HomePage() {
   const [events, setEvents] = useState([]);
@@ -16,7 +18,9 @@ export default function HomePage() {
           id: event._id,
           name: event.eventName,
           date: event.eventDate,
-          location: event.description || "Location not specified", // Assuming location is in description or placeholder
+          location: event.description || "Location not specified",
+          picture: event.picture,
+          eventType: event.eventType,
         }));
         setEvents(formattedEvents);
       })
@@ -89,17 +93,39 @@ export default function HomePage() {
               initial={{ scale: 0.9, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition"
+              className="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
             >
-              <h3 className="text-xl font-semibold text-blue-700">{event.name}</h3>
-              <p className="text-gray-600">📅 {event.date}</p>
-              <p className="text-gray-600">📍 {event.location}</p>
-              <div className="mt-4 flex justify-between">
+              <div className="relative">
+                <img
+                  src={event.picture || "https://via.placeholder.com/400x250?text=Event+Image"}
+                  alt={event.name}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  {event.eventType}
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-800 mb-2">{event.name}</h3>
+                <div className="space-y-1 mb-4">
+                  <p className="text-gray-600 flex items-center">
+                    <span className="text-blue-500 mr-2">📅</span>
+                    {new Date(event.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </p>
+                  <p className="text-gray-600 flex items-center">
+                    <span className="text-green-500 mr-2">📍</span>
+                    {event.location}
+                  </p>
+                </div>
                 <Link
-                  to= {`/evendetails/${event.id}`}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                  to={`/evendetails/${event.id}`}
+                  className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
                 >
-                  View Details
+                  View Details →
                 </Link>
               </div>
             </motion.div>
@@ -118,59 +144,11 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-blue-50 py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.h2
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl font-bold text-gray-800 mb-8 text-center"
-          >
-            What Athletes Say
-          </motion.h2>
+      <Testimonials/>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {["Amazing platform!", "Easy booking process!", "Loved the events!"].map((msg, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.2 }}
-                className="bg-white p-6 rounded-xl shadow-md text-center"
-              >
-                <p className="text-gray-600 italic">“{msg}”</p>
-                <h4 className="mt-4 font-semibold text-blue-600">Athlete {i + 1}</h4>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Popular Sports */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
-        <motion.h2
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-gray-800 mb-8 text-center"
-        >
-          Popular Sports
-        </motion.h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {["Football", "Cricket", "Running", "Swimming"].map((sport, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.2 }}
-              className="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition"
-            >
-              <h3 className="text-lg font-semibold text-blue-700">{sport}</h3>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* PopularSports  */}
+      <PopularSports/>
+      
     </div>
   );
 }
