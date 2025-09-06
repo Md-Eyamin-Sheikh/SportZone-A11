@@ -10,6 +10,8 @@ import MainRout from './MainRout/MainRout.jsx';
 import LoginPage from './Page/Authentication System/LoginPage.jsx';
 import RegisterPage from './Page/Authentication System/RegisterPage.jsx';
 import HomePage from './Page/HomePage/HomePage.jsx';
+import AuthProvider from './providers/AuthProvider.jsx';
+import CreateEvent from './Page/EventManagement/CreateEvent.jsx';
 // import { path } from 'framer-motion/client';
 
 const router = createBrowserRouter([
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
       {
         path:"/register-page",
         element:<RegisterPage/>
+      },
+      {
+        path:"/createvent",
+        element: <CreateEvent/>
       }
 
     ]
@@ -37,7 +43,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <App /> */}
-     <RouterProvider router={router} />,
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )

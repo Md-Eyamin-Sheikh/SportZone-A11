@@ -55,9 +55,9 @@ const Navbar = () => {
             <Link to="/" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
               Home
             </Link>
-            <a href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
+            <Link to="/createvent" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
               Events
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Auth Section */}
