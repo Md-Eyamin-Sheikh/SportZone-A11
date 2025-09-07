@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";

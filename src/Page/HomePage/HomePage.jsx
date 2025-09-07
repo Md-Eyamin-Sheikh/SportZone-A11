@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -59,7 +60,7 @@ export default function HomePage() {
         <Slider {...settings}>
           {slideImages.map((src, i) => (
             <div key={i} className="relative">
-              <img src={src} alt={`slide-${i}`} className="w-full h-[80vh] object-cover" />
+              <img src={src} alt={`slide-${i}`} className="w-full h-[30vh] sm:h-[60vh] md:h-[80vh] object-cover" />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                 <motion.h2
                   initial={{ y: 40, opacity: 0 }}

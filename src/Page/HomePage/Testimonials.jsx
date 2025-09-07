@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import feedbackAnim from "../../Loti-animesun/Testimonials.json"; // তোমার feedback animation json file path
