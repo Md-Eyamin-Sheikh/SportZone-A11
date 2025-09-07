@@ -41,7 +41,7 @@ export default function CreateEvent() {
 
     try {
       // API call placeholder (replace URL with your backend endpoint)
-      const res = await fetch("http://localhost:5000/events", {
+      const res = await fetch("https://sport-zone-survar.vercel.app/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

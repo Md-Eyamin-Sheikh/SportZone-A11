@@ -13,7 +13,7 @@ export default function UpdateEvent() {
 
   // Fetch event by id
   useEffect(() => {
-    fetch(`http://localhost:5000/events/${id}`)
+    fetch(`https://sport-zone-survar.vercel.app/events/${id}`)
       .then(res => res.json())
       .then(data => setEvent(data));
   }, [id]);
@@ -31,7 +31,7 @@ export default function UpdateEvent() {
       picture: form.picture.value,
     };
 
-    fetch(`http://localhost:5000/events/${id}`, {
+    fetch(`https://sport-zone-survar.vercel.app/events/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedEvent),

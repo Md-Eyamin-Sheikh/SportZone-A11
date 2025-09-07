@@ -14,7 +14,7 @@ export default function PopularSports() {
   useEffect(() => {
     const fetchPopularEvents = async () => {
       try {
-        const response = await fetch('http://localhost:5000/events');
+        const response = await fetch('https://sport-zone-survar.vercel.app/events');
         if (!response.ok) {
           throw new Error('Failed to fetch events');
         }

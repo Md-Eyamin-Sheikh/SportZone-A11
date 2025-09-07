@@ -14,7 +14,7 @@ export default function MyBookings() {
   // Fetch bookings by user email
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/myBookings?email=${user.email}`)
+      fetch(`https://sport-zone-survar.vercel.app/myBookings?email=${user.email}`)
         .then(res => res.json())
         .then(data => setBookings(data));
     }
@@ -23,7 +23,7 @@ export default function MyBookings() {
   // Delete booking
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to cancel this booking?")) {
-      fetch(`http://localhost:5000/myBookings/${id}`, { method: "DELETE" })
+      fetch(`https://sport-zone-survar.vercel.app/myBookings/${id}`, { method: "DELETE" })
         .then(res => res.json())
         .then(data => {
           if (data.deletedCount > 0) {

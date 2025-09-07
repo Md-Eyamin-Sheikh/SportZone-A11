@@ -14,7 +14,7 @@ export default function ManageEvents() {
   // Fetch events created by logged-in user
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/manageEvents?email=${user.email}`)
+      fetch(`https://sport-zone-survar.vercel.app/manageEvents?email=${user.email}`)
         .then(res => res.json())
         .then(data => setEvents(data));
     }
@@ -32,7 +32,7 @@ export default function ManageEvents() {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/manageEvents/${id}`, { method: "DELETE" })
+        fetch(`https://sport-zone-survar.vercel.app/manageEvents/${id}`, { method: "DELETE" })
           .then(res => res.json())
           .then(data => {
             if (data.deletedCount > 0) {

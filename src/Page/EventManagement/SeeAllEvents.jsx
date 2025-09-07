@@ -9,7 +9,7 @@ export default function SeeAllEvents() {
 
   // Fetch all events from backend
   useEffect(() => {
-    fetch("http://localhost:5000/events")
+    fetch("https://sport-zone-survar.vercel.app/events")
       .then((res) => res.json())
       .then((data) => setEvents(data));
   }, []);

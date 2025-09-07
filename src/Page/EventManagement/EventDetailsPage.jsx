@@ -16,7 +16,7 @@ export default function EventDetailsPage() {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/events/${id}`);
+        const res = await fetch(`https://sport-zone-survar.vercel.app/events/${id}`);
         if (res.ok) {
           const data = await res.json();
           setEvent(data);
@@ -38,7 +38,7 @@ export default function EventDetailsPage() {
       if (user?.email && event) {
         setBookingCheckLoading(true);
         try {
-          const res = await fetch(`http://localhost:5000/myBookings?email=${user.email}`);
+          const res = await fetch(`https://sport-zone-survar.vercel.app/myBookings?email=${user.email}`);
           if (res.ok) {
             const bookings = await res.json();
             setUserBookings(bookings);
@@ -81,7 +81,7 @@ export default function EventDetailsPage() {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/myBookings", {
+      const res = await fetch("https://sport-zone-survar.vercel.app/myBookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookingData),
@@ -91,7 +91,7 @@ export default function EventDetailsPage() {
         Swal.fire("Success!", "Your booking has been confirmed!", "success");
         setIsAlreadyBooked(true); // Update state to reflect the booking
         // Optionally refresh user bookings
-        const updatedBookings = await fetch(`http://localhost:5000/myBookings?email=${user.email}`);
+        const updatedBookings = await fetch(`https://sport-zone-survar.vercel.app/myBookings?email=${user.email}`);
         if (updatedBookings.ok) {
           const bookings = await updatedBookings.json();
           setUserBookings(bookings);

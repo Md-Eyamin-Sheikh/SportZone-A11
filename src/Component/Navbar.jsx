@@ -1,14 +1,25 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { auth } from '../Firbas/Firbas';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X } from 'lucide-react';
+import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X, Home } from 'lucide-react';
 
 const Navbar = () => {
+  const location = useLocation();
   const [currentUser, setCurrentUser] = useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Check if a path is active
+  const isActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(path);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -36,9 +47,19 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 shadow-xl sticky top-0 z-50">
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 shadow-xl sticky top-0 z-50"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <motion.div
+          className="flex justify-between items-center h-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+        >
           {/* Logo and Brand */}
           <div className="flex items-center space-x-2">
             <div className="bg-gradient-to-br from-orange-400 to-red-500 p-2 rounded-lg shadow-lg">
@@ -51,27 +72,104 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
-              Home
-            </Link>
+          <div className="hidden md:flex items-center space-x-2">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                to="/"
+                className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
+                  isActive('/')
+                    ? 'bg-orange-500 text-white shadow-lg'
+                    : 'text-white hover:text-orange-300 hover:bg-white/10'
+                }`}
+              >
+                <Home className="w-4 h-4 mr-2" />
+                Home
+                {isActive('/') && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-orange-500 rounded-lg -z-10"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </Link>
+            </motion.div>
+
             {currentUser && (
               <>
-                <Link to="/createvent" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
-                  Create Event
-                </Link>
-                {/* <Link to="/my-bookings" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Book an Event
-                </Link> */}
-                <Link to="/my-bookings" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  My Bookings
-                </Link>
-                <Link to="/manageevents" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
-                  <Settings className="w-4 h-4 mr-2" />
-                  Manage Events
-                </Link>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    to="/createvent"
+                    className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
+                      isActive('/createvent')
+                        ? 'bg-orange-500 text-white shadow-lg'
+                        : 'text-white hover:text-orange-300 hover:bg-white/10'
+                    }`}
+                  >
+                    <Trophy className="w-4 h-4 mr-2" />
+                    Create Event
+                    {isActive('/createvent') && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-orange-500 rounded-lg -z-10"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    to="/my-bookings"
+                    className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
+                      isActive('/my-bookings')
+                        ? 'bg-orange-500 text-white shadow-lg'
+                        : 'text-white hover:text-orange-300 hover:bg-white/10'
+                    }`}
+                  >
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    My Bookings
+                    {isActive('/my-bookings') && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-orange-500 rounded-lg -z-10"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    to="/manageevents"
+                    className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
+                      isActive('/manageevents')
+                        ? 'bg-orange-500 text-white shadow-lg'
+                        : 'text-white hover:text-orange-300 hover:bg-white/10'
+                    }`}
+                  >
+                    <Settings className="w-4 h-4 mr-2" />
+                    Manage Events
+                    {isActive('/manageevents') && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-orange-500 rounded-lg -z-10"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
               </>
             )}
           </div>
@@ -112,11 +210,16 @@ const Navbar = () => {
                 </button>
 
                 {/* Profile Dropdown */}
-                {showProfileDropdown && (
-                  <div
-                    className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50"
-                    onMouseLeave={() => setShowProfileDropdown(false)}
-                  >
+                <AnimatePresence>
+                  {showProfileDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50"
+                      onMouseLeave={() => setShowProfileDropdown(false)}
+                    >
                     <div className="px-4 py-3 border-b border-gray-100">
                       <p className="text-sm font-medium text-gray-900">{currentUser.displayName || "User"}</p>
                       <p className="text-sm text-gray-500">Athlete</p>
@@ -133,27 +236,49 @@ const Navbar = () => {
                         </button>
                       </div>
                     </div>
-                  </div>
-                )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             )}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button
+            <motion.button
               onClick={toggleMobileMenu}
-              className="text-white hover:text-orange-300 transition-colors"
+              className="text-white hover:text-orange-300 transition-colors p-2 rounded-lg hover:bg-white/10"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+              <motion.div
+                animate={{ rotate: isMobileMenuOpen ? 45 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </motion.div>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-blue-700 bg-blue-800/95 backdrop-blur-sm">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden border-t border-blue-700 bg-blue-800/95 backdrop-blur-sm overflow-hidden"
+            >
+              <motion.div
+                className="px-2 pt-2 pb-3 space-y-1"
+                initial={{ y: -20 }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.1, duration: 0.3 }}
+              >
               <Link to="/" href="#" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
                 Home
               </Link>
@@ -197,11 +322,12 @@ const Navbar = () => {
                   </button>
                 </div>
               )}
-            </div>
-          </div>
-        )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
