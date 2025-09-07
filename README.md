@@ -4,7 +4,7 @@ A comprehensive web application for discovering, booking, and managing athletic 
 
 ## 🌐 Live Demo
 
-[View Live Application](https://sport-zone-survar.vercel.app/)
+- **Frontend (Netlify):** [https://mellifluous-caramel-bd2364.netlify.app/]
 
 ## ✨ Features
 
