@@ -4,10 +4,12 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import emptyAnimation from "../../Loti-animesun/Booking Calender.json";
+import { Grid, List, LayoutGrid, Table } from 'lucide-react';
 
 export default function MyBookings() {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
+  const [viewMode, setViewMode] = useState('table'); // 'table' or 'card'
 
   // Fetch bookings by user email
   useEffect(() => {
@@ -42,12 +44,49 @@ export default function MyBookings() {
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       <motion.h1
-        className="text-2xl sm:text-3xl font-bold text-center mb-6 text-gray-800"
+        className="text-2xl sm:text-3xl font-bold text-center mb-4 text-gray-800"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
       >
         My Bookings
       </motion.h1>
+
+      {/* View Toggle Buttons */}
+      {bookings.length > 0 && (
+        <motion.div
+          className="flex justify-center mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="bg-white rounded-lg shadow-md p-1 border border-gray-200">
+            <div className="flex space-x-1">
+              <button
+                onClick={() => setViewMode('table')}
+                className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  viewMode === 'table'
+                    ? 'bg-blue-500 text-white shadow-md'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <Table className="w-4 h-4 mr-2" />
+                Table View
+              </button>
+              <button
+                onClick={() => setViewMode('card')}
+                className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  viewMode === 'card'
+                    ? 'bg-blue-500 text-white shadow-md'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <LayoutGrid className="w-4 h-4 mr-2" />
+                Card View
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       {bookings.length === 0 ? (
         <div className="flex flex-col items-center py-12">
@@ -60,9 +99,15 @@ export default function MyBookings() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          {/* Desktop Table View - Hidden on mobile */}
-          <div className="hidden md:block">
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+          {/* Table View */}
+          {viewMode === 'table' && (
+            <motion.div
+              key="table-view"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="bg-white shadow-lg rounded-lg overflow-hidden"
+            >
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
@@ -95,45 +140,53 @@ export default function MyBookings() {
                   ))}
                 </tbody>
               </table>
-            </div>
-          </div>
+            </motion.div>
+          )}
 
-          {/* Mobile Card View - Hidden on desktop */}
-          <div className="md:hidden space-y-4">
-            {bookings.map(b => (
-              <motion.div
-                key={b._id}
-                className="bg-white rounded-xl shadow-md p-4 border border-gray-100"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <div className="flex justify-between items-start mb-3">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{b.event_name}</h3>
-                    <div className="space-y-1">
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="font-medium mr-2">📅</span>
-                        {b.event_date}
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="font-medium mr-2">📍</span>
-                        {b.location}
+          {/* Card View */}
+          {viewMode === 'card' && (
+            <motion.div
+              key="card-view"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            >
+              {bookings.map(b => (
+                <motion.div
+                  key={b._id}
+                  className="bg-white rounded-xl shadow-md p-4 border border-gray-100"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">{b.event_name}</h3>
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm text-gray-600">
+                          <span className="font-medium mr-2">📅</span>
+                          {b.event_date}
+                        </div>
+                        <div className="flex items-center text-sm text-gray-600">
+                          <span className="font-medium mr-2">📍</span>
+                          {b.location}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="flex justify-end pt-3 border-t border-gray-100">
-                  <button
-                    onClick={() => handleDelete(b._id)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-sm font-medium"
-                  >
-                    Cancel Booking
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  <div className="flex justify-end pt-3 border-t border-gray-100">
+                    <button
+                      onClick={() => handleDelete(b._id)}
+                      className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-sm font-medium"
+                    >
+                      Cancel Booking
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </motion.div>
       )}
     </div>
