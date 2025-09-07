@@ -108,14 +108,14 @@ export default function EventDetailsPage() {
               type="text"
               defaultValue={user?.displayName || user?.email || ""}
               placeholder="Your Name"
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="w-full px-4 text-gray-900 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               readOnly
             />
             <input
               type="email"
               defaultValue={user?.email || ""}
               placeholder="Your Email"
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="w-full text-gray-900 px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               readOnly
             />
           </form>

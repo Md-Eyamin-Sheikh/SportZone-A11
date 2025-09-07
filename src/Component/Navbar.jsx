@@ -60,11 +60,11 @@ const Navbar = () => {
                 <Link to="/createvent" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium">
                   Create Event
                 </Link>
-                <Link to="/my-bookings" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
+                {/* <Link to="/my-bookings" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
                   <Calendar className="w-4 h-4 mr-2" />
                   Book an Event
-                </Link>
-                <Link to="" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
+                </Link> */}
+                <Link to="/my-bookings" href="#" className="text-white hover:text-orange-300 transition-colors duration-200 font-medium flex items-center">
                   <BookOpen className="w-4 h-4 mr-2" />
                   My Bookings
                 </Link>
@@ -157,9 +157,21 @@ const Navbar = () => {
               <Link to="/" href="#" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
                 Home
               </Link>
-              <a href="#" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
-                Events
-              </a>
+              <Link to="/createvent" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
+                Create Event
+              </Link>
+              {currentUser && (
+                <>
+                  <Link to="/my-bookings" className="flex items-center px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
+                    <BookOpen className="w-4 h-4 mr-3" />
+                    My Bookings
+                  </Link>
+                  <Link to="/manageevents" className="flex items-center px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
+                    <Settings className="w-4 h-4 mr-3" />
+                    Manage Events
+                  </Link>
+                </>
+              )}
               
               {!currentUser ? (
                 <Link
@@ -174,18 +186,8 @@ const Navbar = () => {
                     <img src={currentUser.photoURL || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"} alt="Profile" className="w-8 h-8 rounded-full mr-3" />
                     <span className="font-medium">{currentUser.displayName || "User"}</span>
                   </div>
-                  <a href="#" className="flex items-center px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
-                    <Calendar className="w-4 h-4 mr-3" />
-                    Book an Event
-                  </a>
-                  <a href="#" className="flex items-center px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
-                    <BookOpen className="w-4 h-4 mr-3" />
-                    My Bookings
-                  </a>
-                  <a href="#" className="flex items-center px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
-                    <Settings className="w-4 h-4 mr-3" />
-                    Manage Events
-                  </a>
+                  
+                 
                   <button
                     onClick={handleLogout}
                     className="flex items-center w-full px-3 py-2 text-red-300 hover:text-red-200 hover:bg-blue-700/50 rounded-md transition-colors"

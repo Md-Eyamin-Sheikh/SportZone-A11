@@ -74,13 +74,13 @@ export default function UpdateEvent() {
             name="eventName"
             defaultValue={event.eventName}
             placeholder="Event Name"
-            className="w-full border rounded-lg p-3"
+            className="w-full border text-gray-900 rounded-lg p-3"
             required
           />
           <select
             name="eventType"
             defaultValue={event.eventType}
-            className="w-full border rounded-lg p-3"
+            className="w-full border text-gray-900 rounded-lg p-3"
             required
           >
             <option>Swimming</option>
@@ -97,7 +97,7 @@ export default function UpdateEvent() {
             type="date"
             name="eventDate"
             defaultValue={event.eventDate}
-            className="w-full border rounded-lg p-3"
+            className="w-full border text-gray-900 rounded-lg p-3"
             required
           />
           <input
@@ -105,14 +105,14 @@ export default function UpdateEvent() {
             name="picture"
             defaultValue={event.picture}
             placeholder="Event Picture URL"
-            className="w-full border rounded-lg p-3"
+            className="w-full text-gray-900 border rounded-lg p-3"
             required
           />
           <textarea
             name="description"
             defaultValue={event.description}
             placeholder="Description"
-            className="w-full border rounded-lg p-3"
+            className="w-full border text-gray-900 rounded-lg p-3"
             rows="4"
             required
           ></textarea>
