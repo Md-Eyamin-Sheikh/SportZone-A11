@@ -258,6 +258,14 @@ const Navbar = () => {
                       <p className="text-sm text-gray-500">Athlete</p>
                     </div>
                      <div className="py-1"> 
+                      <Link
+                        to="/profile"
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                        onClick={() => setShowProfileDropdown(false)}
+                      >
+                        <User className="w-4 h-4 mr-3" />
+                        My Profile
+                      </Link> 
                       
                       <div className="border-t border-gray-100 mt-1 pt-1">
                         <button

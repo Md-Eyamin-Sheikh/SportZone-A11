@@ -19,6 +19,7 @@ import UpdateEvent from './Page/EventManagement/UpdateEvent.jsx';
 import SearchEvents from './Page/EventManagement/SearchEvents.jsx';
 import SeeAllEvents from './Page/EventManagement/SeeAllEvents.jsx';
 import PopularSports from './Page/HomePage/PopularSports.jsx';
+import UserProfile from './Page/UserProfile/UserProfile.jsx';
 import About from './Page/About.jsx';
 import Testimonials from './Page/HomePage/Testimonials.jsx';
 // import { path } from 'framer-motion/client';
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path:"/popularsports",
         element:<PopularSports/>
+      },
+      {
+        path:"/profile",
+        element:<UserProfile/>
       },
       {
         path:"/about",

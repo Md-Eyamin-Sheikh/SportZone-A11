@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 import Lottie from "lottie-react";
 import Swal from "sweetalert2";
 import updateAnimation from "../../Loti-animesun/UPDATE.json";
@@ -50,17 +51,27 @@ export default function UpdateEvent() {
   }
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
-      {/* Title Animation */}
-      <motion.h1
-        className="text-3xl font-bold text-center mb-6"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        Update Event
-      </motion.h1>
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 p-6">
+      <div className="max-w-3xl mx-auto">
+        {/* Back Button */}
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-6 flex items-center space-x-2 text-orange-600 hover:text-orange-700 transition-colors"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="font-medium">Back</span>
+        </button>
 
-      <div className="flex flex-col md:flex-row items-center gap-6">
+        {/* Title Animation */}
+        <motion.h1
+          className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Update Event
+        </motion.h1>
+
+        <div className="flex flex-col md:flex-row items-center gap-6">
         {/* Animation side */}
         <Lottie animationData={updateAnimation} className="w-72 h-72" />
 
@@ -120,7 +131,7 @@ export default function UpdateEvent() {
           {/* Submit button */}
           <motion.button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg font-semibold"
+            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -129,5 +140,6 @@ export default function UpdateEvent() {
         </form>
       </div>
     </div>
+  </div>
   );
 }
