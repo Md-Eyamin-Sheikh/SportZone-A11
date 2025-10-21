@@ -68,16 +68,20 @@ export default function PopularSports() {
     }));
   };
   return (
-    <section className="py-16 px-6 bg-gradient-to-r from-orange-50 to-orange-100">
-      {/* Title */}
-      <motion.h2
-        initial={{ opacity: 0, y: -30 }}
+    <section className="py-20 px-6 bg-gradient-to-r from-orange-50 to-orange-100">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl font-extrabold text-center text-gray-800 mb-12"
+        className="text-center mb-16"
       >
-        Popular Events
-      </motion.h2>
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent mb-4">
+          Popular Events
+        </h2>
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          Discover the most exciting and trending sports events in your area
+        </p>
+      </motion.div>
 
       {/* Events Grid */}
       <div className="max-w-7xl mx-auto">
@@ -140,9 +144,9 @@ export default function PopularSports() {
       </div>
 
       {/* Bottom Animation */}
-      <div className="flex justify-center mt-12">
+      {/* <div className="flex justify-center mt-12">
         <Lottie animationData={sportsAnim} className="w-80 h-80" />
-      </div>
+      </div> */}
     </section>
   );
 }

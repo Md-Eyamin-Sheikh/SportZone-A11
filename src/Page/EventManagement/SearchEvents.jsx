@@ -38,7 +38,7 @@ export default function SearchEvents() {
   const eventTypes = ['All', 'Swimming', 'Football', 'Basketball', 'Tennis', 'Cricket'];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-orange-100 pt-22">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,7 +62,7 @@ export default function SearchEvents() {
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+              className="px-4 py-2 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-orange-500"
             >
               {eventTypes.map(type => (
                 <option key={type} value={type}>{type}</option>

@@ -7,6 +7,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import PopularSports from "./PopularSports";
 import Testimonials from "./Testimonials";
+import StatsCounter from "./StatsCounter";
+// import UpcomingEventsTicker from "./UpcomingEventsTicker";
+import SportCategoriesGrid from "./SportCategoriesGrid";
 
 export default function HomePage() {
   const [events, setEvents] = useState([]);
@@ -50,6 +53,8 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-orange-50">
+
+  
       {/* Banner / Slider */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -76,16 +81,26 @@ export default function HomePage() {
         </Slider>
       </motion.div>
 
+      
+
       {/* Featured Events */}
       <section className="max-w-7xl mx-auto px-6 py-12">
-        <motion.h2
-          initial={{ x: -50, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
+
+        <motion.div
+          initial={{ y: -30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-gray-800 mb-8 text-center"
+          className="text-center mb-12"
         >
-          Featured Events
-        </motion.h2>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-800 bg-clip-text text-transparent mb-4">
+            Featured Events
+          </h2>
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+            Discover upcoming sports events, tournaments, and competitions happening around you. 
+            <span className="text-orange-600 font-medium"> Stay updated and join the excitement!</span>
+          </p>
+        </motion.div>
+        
 
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {events.slice(0, 6).map((event, idx) => (
@@ -144,11 +159,21 @@ export default function HomePage() {
         </div>
       </section>
 
+      
+
+      
+
+      {/* Sport Categories Grid */}
+      <SportCategoriesGrid />
+
       {/* Testimonials */}
       <Testimonials/>
 
       {/* PopularSports  */}
       <PopularSports/>
+
+      {/* Statistics Counter */}
+      <StatsCounter />
       
     </div>
   );
