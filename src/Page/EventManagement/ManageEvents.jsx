@@ -70,7 +70,7 @@ export default function ManageEvents() {
             <div className="bg-white shadow-lg rounded-lg overflow-hidden">
               <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-gradient-to-r from-green-500 to-teal-600 text-white">
+                  <tr className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
                     <th className="py-4 px-6 text-left font-semibold">Event Name</th>
                     <th className="py-4 px-6 text-left font-semibold">Date</th>
                     <th className="py-4 px-6 text-left font-semibold">Location</th>
@@ -92,7 +92,7 @@ export default function ManageEvents() {
                         <div className="flex justify-center gap-3">
                           {/* Update Button */}
                           <Link to={`/update-event/${ev._id}`}>
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
                               Update
                             </button>
                           </Link>
@@ -140,7 +140,7 @@ export default function ManageEvents() {
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-100">
                   <Link to={`/update-event/${ev._id}`} className="flex-1">
-                    <button className="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm font-medium">
+                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 text-sm font-medium">
                       Update Event
                     </button>
                   </Link>

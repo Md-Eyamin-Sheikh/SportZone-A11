@@ -32,7 +32,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-gradient-to-r from-blue-50 to-purple-50 py-16 px-6">
+    <section className="bg-gradient-to-r from-orange-50 to-orange-100 py-16 px-6">
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}

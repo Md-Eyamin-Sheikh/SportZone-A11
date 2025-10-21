@@ -49,7 +49,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-orange-50">
       {/* Banner / Slider */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -102,7 +102,7 @@ export default function HomePage() {
                   alt={event.name}
                   className="w-full h-48 object-cover"
                 />
-                <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                   {event.eventType}
                 </div>
               </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
                 </div>
                 <Link
                   to={`/evendetails/${event.id}`}
-                  className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
+                  className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
                 >
                   View Details →
                 </Link>
@@ -137,7 +137,7 @@ export default function HomePage() {
         <div className="flex justify-center mt-8">
           <Link
             to="/events"
-            className="bg-gray-800 text-white px-6 py-3 rounded-xl hover:bg-gray-900 transition"
+            className="bg-orange-500 text-white px-6 py-3 rounded-xl hover:bg-orange-600 transition"
           >
             See All Events
           </Link>

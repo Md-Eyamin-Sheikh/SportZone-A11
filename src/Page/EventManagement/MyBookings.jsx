@@ -42,7 +42,7 @@ export default function MyBookings() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
+    <div className="min-h-screen bg-orange-50 p-4 pt-20 sm:p-6">
       <motion.h1
         className="text-2xl sm:text-3xl font-bold text-center mb-4 text-gray-800"
         initial={{ opacity: 0, y: -50 }}
@@ -65,7 +65,7 @@ export default function MyBookings() {
                 onClick={() => setViewMode('table')}
                 className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   viewMode === 'table'
-                    ? 'bg-blue-500 text-white shadow-md'
+                    ? 'bg-orange-500 text-white shadow-md'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -76,7 +76,7 @@ export default function MyBookings() {
                 onClick={() => setViewMode('card')}
                 className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   viewMode === 'card'
-                    ? 'bg-blue-500 text-white shadow-md'
+                    ? 'bg-orange-500 text-white shadow-md'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -110,7 +110,7 @@ export default function MyBookings() {
             >
               <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                  <tr className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
                     <th className="py-4 px-6 text-left font-semibold">Event Name</th>
                     <th className="py-4 px-6 text-left font-semibold">Date</th>
                     <th className="py-4 px-6 text-left font-semibold">Location</th>

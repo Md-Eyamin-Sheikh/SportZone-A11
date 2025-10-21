@@ -68,7 +68,7 @@ export default function PopularSports() {
     }));
   };
   return (
-    <section className="py-16 px-6 bg-gradient-to-r from-purple-50 to-blue-50">
+    <section className="py-16 px-6 bg-gradient-to-r from-orange-50 to-orange-100">
       {/* Title */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}

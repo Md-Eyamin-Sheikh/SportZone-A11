@@ -19,7 +19,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black text-white">
+    <footer className="bg-gradient-to-b from-orange-900 to-orange-950 text-white">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -27,15 +27,15 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-br from-orange-400 to-red-500 p-2 rounded-lg shadow-lg">
+              <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-2 rounded-lg shadow-lg">
                 <Trophy className="h-8 w-8 text-white" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">SportZone</h3>
-                <p className="text-sm text-gray-400">Athletic Events Platform</p>
+                <p className="text-sm text-orange-200">Athletic Events Platform</p>
               </div>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-orange-100 text-sm leading-relaxed">
               Connecting athletes and sports fans with local athletic events. 
               Your gateway to discovering, booking, and participating in amazing sports competitions.
             </p>
@@ -64,7 +64,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a href="#" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center group">
-                  <Calendar className="h-4 w-4 mr-2 group-hover:text-orange-400" />
+                  <Calendar className="h-4 w-4 mr-2 group-hover:text-orange-300" />
                   Browse Events
                 </a>
               </li>

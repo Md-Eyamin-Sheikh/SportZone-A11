@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { auth } from '../Firbas/Firbas';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X, Home } from 'lucide-react';
+import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X, Home, Search, Star } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
@@ -51,9 +51,9 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 shadow-xl sticky top-0 z-50"
+      className="bg-gradient-to-r from-orange-500 to-orange-600 shadow-xl fixed top-0 w-full z-50"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto ">
         <motion.div
           className="flex justify-between items-center h-16"
           initial={{ opacity: 0 }}
@@ -67,7 +67,7 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col">
               <h1 className="text-xl font-bold text-white tracking-tight">SportZone</h1>
-              <p className="text-xs text-blue-200 hidden sm:block">Athletic Events Platform</p>
+              <p className="text-xs text-orange-200 hidden sm:block">Athletic Events Platform</p>
             </div>
           </div>
 
@@ -94,6 +94,39 @@ const Navbar = () => {
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
+              </Link>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                to="/events"
+                className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
+                  isActive('/events')
+                    ? 'bg-orange-700 text-white shadow-lg'
+                    : 'text-white hover:text-orange-200 hover:bg-white/10'
+                }`}
+              >
+                <Search className="w-4 h-4 mr-2" />
+                All Events
+              </Link>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                to="/about"
+                className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
+                  isActive('/about')
+                    ? 'bg-orange-700 text-white shadow-lg'
+                    : 'text-white hover:text-orange-200 hover:bg-white/10'
+                }`}
+              >
+                About
               </Link>
             </motion.div>
 
@@ -271,7 +304,7 @@ const Navbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden border-t border-blue-700 bg-blue-800/95 backdrop-blur-sm overflow-hidden"
+              className="md:hidden border-t border-orange-700 bg-orange-800/95 backdrop-blur-sm overflow-hidden"
             >
               <motion.div
                 className="px-2 pt-2 pb-3 space-y-1"
@@ -279,21 +312,31 @@ const Navbar = () => {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
               >
-              <Link to="/" href="#" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
+              <Link to="/" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
                 Home
               </Link>
-              <Link to="/createvent" className="block px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
-                Create Event
+              <Link to="/events" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                All Events
+              </Link>
+              <Link to="/about" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                About
               </Link>
               {currentUser && (
                 <>
-                  <Link to="/my-bookings" className="flex items-center px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
+                  <Link to="/createvent" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                    Create Event
+                  </Link>
+                  <Link to="/my-bookings" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
                     <BookOpen className="w-4 h-4 mr-3" />
                     My Bookings
                   </Link>
-                  <Link to="/manageevents" className="flex items-center px-3 py-2 text-white hover:text-orange-300 hover:bg-blue-700/50 rounded-md transition-colors">
+                  <Link to="/manageevents" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
                     <Settings className="w-4 h-4 mr-3" />
                     Manage Events
+                  </Link>
+                  <Link to="/favorites" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                    <Star className="w-4 h-4 mr-3" />
+                    Favorites
                   </Link>
                 </>
               )}
@@ -306,16 +349,15 @@ const Navbar = () => {
                   Login
                 </Link>
               ) : (
-                <div className="border-t border-blue-700 mt-3 pt-3">
+                <div className="border-t border-orange-700 mt-3 pt-3">
                   <div className="flex items-center px-3 py-2 text-white">
                     <img src={currentUser.photoURL || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"} alt="Profile" className="w-8 h-8 rounded-full mr-3" />
                     <span className="font-medium">{currentUser.displayName || "User"}</span>
                   </div>
                   
-                 
                   <button
                     onClick={handleLogout}
-                    className="flex items-center w-full px-3 py-2 text-red-300 hover:text-red-200 hover:bg-blue-700/50 rounded-md transition-colors"
+                    className="flex items-center w-full px-3 py-2 text-red-300 hover:text-red-200 hover:bg-orange-700/50 rounded-md transition-colors"
                   >
                     <LogOut className="w-4 h-4 mr-3" />
                     Logout

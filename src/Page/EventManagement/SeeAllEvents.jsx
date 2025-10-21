@@ -21,7 +21,7 @@ export default function SeeAllEvents() {
   );
 
   return (
-    <section className="max-w-7xl mx-auto bg-amber-50 px-6 py-12">
+    <section className="max-w-7xl mx-auto bg-amber-50  py-18 ">
       {/* Title */}
       <motion.h2
         initial={{ y: -40, opacity: 0 }}
@@ -33,7 +33,7 @@ export default function SeeAllEvents() {
       </motion.h2>
 
       {/* Search Box */}
-      <div className="flex justify-center mb-10">
+      <div className="flex justify-center py-8 my-10">
         <input
           type="text"
           placeholder="Search by name or location..."

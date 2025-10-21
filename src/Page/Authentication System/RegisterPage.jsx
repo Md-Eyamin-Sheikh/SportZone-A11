@@ -85,10 +85,10 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-orange-100 p-6">
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl grid grid-cols-1 md:grid-cols-2 overflow-hidden">
         {/* Lottie Animation */}
-        <div className="hidden md:flex items-center justify-center bg-green-50 p-6">
+        <div className="hidden md:flex items-center justify-center bg-orange-50 p-6">
           <Lottie animationData={CreatAnimation} loop={true} />
         </div>
 
@@ -167,7 +167,7 @@ export default function RegisterPage() {
               whileTap={{ scale: 0.95 }}
               type="submit"
               disabled={loading}
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold shadow-md transition disabled:opacity-50"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold shadow-md transition disabled:opacity-50"
             >
               {loading ? "Registering..." : "Register"}
             </motion.button>
