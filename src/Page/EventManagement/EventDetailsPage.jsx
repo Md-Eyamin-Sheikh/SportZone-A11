@@ -114,7 +114,7 @@ export default function EventDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 pt-22">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ export default function EventDetailsPage() {
             initial={{ x: -40, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-3xl font-bold text-blue-700"
+            className="text-3xl font-bold text-orange-700"
           >
             {event.eventName}
           </motion.h2>
@@ -183,7 +183,7 @@ export default function EventDetailsPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="mt-6 w-full bg-green-100 border-2 border-green-300 rounded-xl p-4 text-center"
+              className="mt-6 w-full bg-orange-100 border-2 border-orange-300 rounded-xl p-4 text-center"
             >
               <div className="flex items-center justify-center space-x-2">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,7 +198,7 @@ export default function EventDetailsPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleBooking}
-              className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow-md transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              className="mt-6 w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold shadow-md transition focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
             >
               Book Now
             </motion.button>
