@@ -42,9 +42,9 @@ export default function MyBookings() {
   };
 
   return (
-    <div className="min-h-screen bg-orange-50 p-4 pt-20 sm:p-6">
+    <div className="min-h-screen bg-orange-50 p-4 pt-20  sm:p-6">
       <motion.h1
-        className="text-2xl sm:text-3xl font-bold text-center mb-4 text-gray-800"
+        className="text-2xl sm:text-3xl font-bold text-center pt-12 mb-4 text-gray-800"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
       >

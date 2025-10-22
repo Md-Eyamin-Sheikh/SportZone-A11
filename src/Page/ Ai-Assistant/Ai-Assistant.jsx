@@ -46,30 +46,56 @@ const AIAssistant = () => {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      let response = '';
-      const lowerText = text.toLowerCase();
-      
-      if (lowerText.includes('event') || lowerText.includes('sports')) {
-        response = `Great question about "${text}"! SportZone offers various sports events including football, basketball, cricket, tennis, and more. You can browse events on our homepage, create your own events, or join existing ones. Would you like help finding specific events?`;
-      } else if (lowerText.includes('book') || lowerText.includes('join')) {
-        response = `To book or join events: 1) Browse available events, 2) Click on event details, 3) Click "Book Now" if available, 4) Confirm your booking. You can manage all your bookings in the "My Bookings" section.`;
-      } else if (lowerText.includes('create') || lowerText.includes('organize')) {
-        response = `To create an event: 1) Go to "Create Event" page, 2) Fill in event details (name, date, location, description), 3) Set participant limits, 4) Submit for approval. You can manage your events in "Manage Events" section.`;
-      } else {
-        response = `Thanks for your question about "${text}". I'm here to help with SportZone features like finding events, booking activities, creating events, and general sports information. What specific aspect would you like to know more about?`;
+    try {
+      const response = await fetch('http://localhost:5000/api/chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: text }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      const data = await response.json();
       
       const botMessage = {
         id: Date.now() + 1,
         type: 'bot',
-        content: response,
+        content: data.response || 'Sorry, I could not process your request.',
         timestamp: new Date(),
       };
+      
       setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Chatbot API error:', error);
+      
+      // Fallback response when server is not available
+      let fallbackResponse = '';
+      const lowerText = text.toLowerCase();
+      
+      if (lowerText.includes('event') || lowerText.includes('sports')) {
+        fallbackResponse = `Great question about "${text}"! SportZone offers various sports events including football, basketball, cricket, tennis, and more. You can browse events on our homepage, create your own events, or join existing ones.`;
+      } else if (lowerText.includes('book') || lowerText.includes('join')) {
+        fallbackResponse = `To book or join events: 1) Browse available events, 2) Click on event details, 3) Click "Book Now" if available, 4) Confirm your booking. You can manage all your bookings in the "My Bookings" section.`;
+      } else if (lowerText.includes('create') || lowerText.includes('organize')) {
+        fallbackResponse = `To create an event: 1) Go to "Create Event" page, 2) Fill in event details (name, date, location, description), 3) Set participant limits, 4) Submit for approval.`;
+      } else {
+        fallbackResponse = `Thanks for your question! I'm here to help with SportZone features like finding events, booking activities, creating events, and general sports information. What would you like to know more about?`;
+      }
+      
+      const errorMessage = {
+        id: Date.now() + 1,
+        type: 'bot',
+        content: fallbackResponse,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleQuickAction = (query) => {

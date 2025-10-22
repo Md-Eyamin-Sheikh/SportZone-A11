@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { auth } from '../Firbas/Firbas';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X, Home, Search, Star } from 'lucide-react';
+import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X, Home, Search, Star, Sparkles } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
@@ -79,7 +79,7 @@ const Navbar = () => {
             >
               <Link
                 to="/"
-                className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
+                className={`relative px-2 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
                   isActive('/')
                     ? 'bg-orange-500 text-white shadow-lg'
                     : 'text-white hover:text-orange-300 hover:bg-white/10'
@@ -111,6 +111,23 @@ const Navbar = () => {
               >
                 <Search className="w-4 h-4 mr-2" />
                 All Events
+              </Link>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                to="/ai-assistant"
+                className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${
+                  isActive('/ai-assistant')
+                    ? 'bg-orange-700 text-white shadow-lg'
+                    : 'text-white hover:text-orange-200 hover:bg-white/10'
+                }`}
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                AI Help
               </Link>
             </motion.div>
 
@@ -180,7 +197,7 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
 
-                <motion.div
+                {/* <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -202,7 +219,7 @@ const Navbar = () => {
                       />
                     )}
                   </Link>
-                </motion.div>
+                </motion.div> */}
               </>
             )}
           </div>
@@ -267,6 +284,15 @@ const Navbar = () => {
                         My Profile
                       </Link> 
                       
+                      <Link
+                        to="/manageevents"
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                        onClick={() => setShowProfileDropdown(false)}
+                      >
+                        <Settings className="w-4 h-4 mr-3" />
+                        Manage Events
+                      </Link>
+                      
                       <div className="border-t border-gray-100 mt-1 pt-1">
                         <button
                           onClick={handleLogout}
@@ -277,6 +303,7 @@ const Navbar = () => {
                         </button>
                       </div>
                     </div>
+                    
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -325,6 +352,10 @@ const Navbar = () => {
               </Link>
               <Link to="/events" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
                 All Events
+              </Link>
+              <Link to="/ai-assistant" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                <Sparkles className="w-4 h-4 mr-3" />
+                AI Help
               </Link>
               <Link to="/about" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
                 About
