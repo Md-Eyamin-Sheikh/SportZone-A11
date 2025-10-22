@@ -356,22 +356,26 @@ const Navbar = () => {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
               >
-              <Link to="/" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+              <Link to="/" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                <Home className="w-4 h-4 mr-3" />
                 Home
               </Link>
-              <Link to="/events" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+              <Link to="/events" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                <Search className="w-4 h-4 mr-3" />
                 All Events
               </Link>
               <Link to="/ai-assistant" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
                 <Sparkles className="w-4 h-4 mr-3" />
                 AI Help
               </Link>
-              <Link to="/about" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+              <Link to="/about" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                <User className="w-4 h-4 mr-3" />
                 About
               </Link>
               {currentUser && (
                 <>
-                  <Link to="/createvent" className="block px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                  <Link to="/createvent" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
+                    <Trophy className="w-4 h-4 mr-3" />
                     Create Event
                   </Link>
                   <Link to="/my-bookings" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
@@ -381,10 +385,6 @@ const Navbar = () => {
                   <Link to="/manageevents" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
                     <Settings className="w-4 h-4 mr-3" />
                     Manage Events
-                  </Link>
-                  <Link to="/favorites" className="flex items-center px-3 py-2 text-white hover:text-orange-200 hover:bg-orange-700/50 rounded-md transition-colors">
-                    <Star className="w-4 h-4 mr-3" />
-                    Favorites
                   </Link>
                 </>
               )}

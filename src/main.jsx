@@ -88,6 +88,10 @@ const router = createBrowserRouter([
         path:"/testimonials",
         element:<Testimonials/>
       },
+      {
+        path:"/dashboard",
+        element:<UserDashboard/>
+      }
       
 
     ]
@@ -96,10 +100,7 @@ const router = createBrowserRouter([
         path:"/ai-assistant",
         element:<AIAssistant/>
       },
-      {
-        path:"/dashboard",
-        element:<UserDashboard/>
-      }
+      
 ]);
 
 createRoot(document.getElementById('root')).render(
