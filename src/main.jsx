@@ -22,6 +22,7 @@ import PopularSports from './Page/HomePage/PopularSports.jsx';
 import UserProfile from './Page/UserProfile/UserProfile.jsx';
 import About from './Page/About.jsx';
 import Testimonials from './Page/HomePage/Testimonials.jsx';
+import AIAssistant from './Page/ Ai-Assistant/Ai-Assistant.jsx';
 // import { path } from 'framer-motion/client';
 
 const router = createBrowserRouter([
@@ -85,10 +86,15 @@ const router = createBrowserRouter([
       {
         path:"/testimonials",
         element:<Testimonials/>
-      }
+      },
+      
 
     ]
   },
+  {
+        path:"/ai-assistant",
+        element:<AIAssistant/>
+      }
 ]);
 
 createRoot(document.getElementById('root')).render(
