@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { auth } from '../Firbas/Firbas';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X, Home, Search, Star, Sparkles } from 'lucide-react';
+import { ChevronDown, User, Calendar, BookOpen, Settings, LogOut, Trophy, Menu, X, Home, Search, Star, Sparkles, Activity } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
@@ -275,6 +275,15 @@ const Navbar = () => {
                       <p className="text-sm text-gray-500">Athlete</p>
                     </div>
                      <div className="py-1"> 
+                      <Link
+                        to="/dashboard"
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                        onClick={() => setShowProfileDropdown(false)}
+                      >
+                        <Activity className="w-4 h-4 mr-3" />
+                        Dashboard
+                      </Link>
+                      
                       <Link
                         to="/profile"
                         className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"

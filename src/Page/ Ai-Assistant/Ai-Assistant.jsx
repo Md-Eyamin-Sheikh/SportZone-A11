@@ -12,8 +12,10 @@ const AIAssistant = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   const quickActions = [
     { icon: Calendar, label: 'Find Events', query: 'Show me upcoming sports events' },
@@ -102,6 +104,59 @@ const AIAssistant = () => {
     handleSend(query);
   };
 
+  const handleImageUpload = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageMessage = {
+          id: Date.now(),
+          type: 'user',
+          content: `[Image uploaded: ${file.name}]`,
+          image: e.target.result,
+          timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, imageMessage]);
+        
+        // Send a message about the image
+        handleSend(`I've uploaded an image: ${file.name}. Can you help me with this?`);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleVoiceRecord = async () => {
+    if (!isRecording) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        setIsRecording(true);
+        
+        // Simulate recording for 3 seconds
+        setTimeout(() => {
+          setIsRecording(false);
+          stream.getTracks().forEach(track => track.stop());
+          
+          // Simulate voice message
+          const voiceMessage = {
+            id: Date.now(),
+            type: 'user',
+            content: '[Voice message recorded]',
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, voiceMessage]);
+          handleSend('I just sent a voice message. Can you help me with sports events?');
+        }, 3000);
+      } catch (error) {
+        console.error('Microphone access denied:', error);
+        alert('Microphone access is required for voice messages.');
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
       {/* Header */}
@@ -181,6 +236,13 @@ const AIAssistant = () => {
                       : 'bg-white border border-orange-100 text-gray-800 rounded-tl-sm'
                   }`}
                 >
+                  {message.image && (
+                    <img 
+                      src={message.image} 
+                      alt="Uploaded" 
+                      className="max-w-xs rounded-lg mb-2"
+                    />
+                  )}
                   <p className="text-sm md:text-base leading-relaxed whitespace-pre-wrap">
                     {message.content}
                   </p>
@@ -259,10 +321,29 @@ const AIAssistant = () => {
                 style={{ minHeight: '48px' }}
               />
               <div className="absolute right-2 bottom-2 flex gap-1">
-                <button className="p-2 text-orange-600 hover:bg-orange-100 rounded-xl transition-colors">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileSelect}
+                  accept="image/*"
+                  className="hidden"
+                />
+                <button 
+                  onClick={handleImageUpload}
+                  className="p-2 text-orange-600 hover:bg-orange-100 rounded-xl transition-colors"
+                  title="Upload image"
+                >
                   <Image className="w-5 h-5" />
                 </button>
-                <button className="p-2 text-orange-600 hover:bg-orange-100 rounded-xl transition-colors">
+                <button 
+                  onClick={handleVoiceRecord}
+                  className={`p-2 rounded-xl transition-colors ${
+                    isRecording 
+                      ? 'text-red-600 bg-red-100 animate-pulse' 
+                      : 'text-orange-600 hover:bg-orange-100'
+                  }`}
+                  title={isRecording ? 'Recording...' : 'Record voice message'}
+                >
                   <Mic className="w-5 h-5" />
                 </button>
               </div>

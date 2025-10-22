@@ -23,6 +23,7 @@ import UserProfile from './Page/UserProfile/UserProfile.jsx';
 import About from './Page/About.jsx';
 import Testimonials from './Page/HomePage/Testimonials.jsx';
 import AIAssistant from './Page/ Ai-Assistant/Ai-Assistant.jsx';
+import UserDashboard from './Page/UserProfile/UserDashboard.jsx';
 // import { path } from 'framer-motion/client';
 
 const router = createBrowserRouter([
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
   {
         path:"/ai-assistant",
         element:<AIAssistant/>
+      },
+      {
+        path:"/dashboard",
+        element:<UserDashboard/>
       }
 ]);
 
