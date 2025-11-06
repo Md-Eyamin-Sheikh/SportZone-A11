@@ -82,7 +82,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
@@ -91,7 +91,7 @@ export default function Testimonials() {
           <div className="w-72 h-72">
             <Lottie animationData={feedbackAnim} loop={true} />
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
