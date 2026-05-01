@@ -10,11 +10,11 @@ A comprehensive full-stack web application for discovering, booking, and managin
 ## 📸 Screenshots
 
 ### User Dashboard
-![User Dashboard](/home/eyamin/Desktop/project/SportZone%20A11/SportZone-Claind/README_1.png)
+![User Dashboard](./README_1.png)
 *Personalized dashboard showing statistics, quick actions, recent events, bookings, and progress tracking*
 
 ### HomePage
-![SportZone HomePage](/home/eyamin/Desktop/project/SportZone%20A11/SportZone-Claind/README_2.png)
+![SportZone HomePage](./README_2.png)
 *Beautiful hero section with animated branding and call-to-action buttons*
 
 ## ✨ Key Features
