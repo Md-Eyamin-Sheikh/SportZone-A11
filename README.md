@@ -7,6 +7,16 @@ A comprehensive full-stack web application for discovering, booking, and managin
 - **Frontend (Netlify):** [https://mellifluous-caramel-bd2364.netlify.app/]
 - **Backend (Vercel):** [https://sport-zone-survar.vercel.app/]
 
+## 📸 Screenshots
+
+### User Dashboard
+![User Dashboard](/home/eyamin/Desktop/project/SportZone%20A11/SportZone-Claind/README_1.png)
+*Personalized dashboard showing statistics, quick actions, recent events, bookings, and progress tracking*
+
+### HomePage
+![SportZone HomePage](/home/eyamin/Desktop/project/SportZone%20A11/SportZone-Claind/README_2.png)
+*Beautiful hero section with animated branding and call-to-action buttons*
+
 ## ✨ Key Features
 
 ### 🏠 Homepage & Discovery
